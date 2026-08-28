@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ARKAN_SYS // GESTURE DECRYPT</title>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<!-- Global CRT Scanlines -->
+<div class="scanlines"></div>
+
+<div id="app" class="cyber-deck">
+
+  <!-- Left: Main Targeting Optics -->
+  <div id="stage" class="optics-container">
+    <video id="webcam" playsinline autoplay muted></video>
+    <canvas id="sceneCanvas"></canvas>
+
+    <div class="sys-nav top-nav">
+      <div class="sys-brand">SYS.ARKAN // <small>OPTICS_ONLINE</small></div>
+      <div class="sys-status-pill">
+        <span id="statusDot" class="status-dot"></span>
+        <span id="statusText">BOOTING OPTICS...</span>
+      </div>
+    </div>
+
+    <div id="progressBadge" class="progress-badge">
+      <span id="progressText">0 / 9 DECRYPTED</span>
+    </div>
+
+    <div class="sys-nav bottom-nav">
+      <div class="gesture-key">
+        <div class="item"><span class="swatch pinch">[X]</span> DUAL_PINCH : LOCK TARGET</div>
+        <div class="item"><span class="swatch drag">[-]</span> SINGLE_PINCH : DRAG SECTOR</div>
+        <div class="item"><span class="swatch fist">[#]</span> HOLD_FIST : EXECUTE/PURGE</div>
+      </div>
+    </div>
+
+    <div id="loadingOverlay" class="sys-overlay">
+      <div class="loader-text" id="loaderText">ESTABLISHING NEURAL LINK (LOADING MODEL)...</div>
+      <div class="loader-bar"></div>
+      <button type="button" id="loaderRetry" class="loader-retry hidden">> RETRY_CONNECTION</button>
+    </div>
+
+    <div id="errorBanner" class="sys-error"></div>
+  </div>
+
+  <!-- Right: Data Vault Terminal -->
+  <aside id="gallery" class="data-vault">
+    <div class="vault-head">
+      <span class="vault-title">DATA_VAULT</span>
+      <span class="vault-count" id="galleryCount">0 / 3</span>
+    </div>
+
+    <div class="strip-complete-msg" id="stripCompleteMsg">
+      WARNING: VAULT CAPACITY REACHED. DOWNLOAD OR PURGE DATA.
+    </div>
+
+    <div id="galleryStrip" class="vault-strip">
+      <div class="vault-empty" id="galleryEmpty">
+        > NO DATA EXTRACTED.<br>> AWAITING INPUT...
+      </div>
+    </div>
+
+    <div class="vault-actions">
+      <button type="button" id="downloadStripBtn" class="vault-action-btn" disabled>> EXTRACT_DATA</button>
+      <button type="button" id="resetAllBtn" class="vault-action-btn vault-action-btn--danger">> PURGE_ALL</button>
+    </div>
+
+    <div class="vault-footer">AUTHOR: MOHAMED ARKAN</div>
+  </aside>
+
+</div>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

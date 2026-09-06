@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>ARKAN_SYS // GESTURE DECRYPT</title>
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
 <!-- Global CRT Scanlines -->
 <div class="scanlines"></div>
+
+<!-- Dev FPS / Debug HUD (activated with ?debug) -->
+<div id="debugOverlay" class="debug-overlay hidden">
+  <div class="debug-item">RENDER: <span id="debugRenderFps">--</span> FPS</div>
+  <div class="debug-item">VISION: <span id="debugVisionFps">--</span> FPS</div>
+  <div class="debug-item">STATE: <span id="debugState">TRACKING</span></div>
+  <div class="debug-item">LATENCY: <span id="debugLatency">--</span>ms</div>
+</div>
 
 <div id="app" class="cyber-deck">
 
@@ -29,17 +37,38 @@
       <span id="progressText">0 / 9 DECRYPTED</span>
     </div>
 
+    <!-- Touch Fallback Capture Action -->
+    <button type="button" id="touchCaptureBtn" class="touch-action-btn hidden" aria-label="Tap to capture photo frame">
+      <span class="btn-icon">[+]</span> TAP TO CAPTURE
+    </button>
+
+    <!-- Solved State DOM Overlay -->
+    <div id="solvedOverlay" class="sys-overlay solved-overlay hidden">
+      <div class="solved-card">
+        <div class="solved-glitch">> SECTOR DECRYPTED <</div>
+        <h2 class="solved-title">PUZZLE SOLVED</h2>
+        <p class="solved-hint">CLOSE FIST OR TAP BELOW TO ARCHIVE</p>
+        <div class="solved-actions">
+          <button type="button" id="solvedSaveBtn" class="action-btn action-btn--save">> SAVE TO VAULT</button>
+          <button type="button" id="solvedShuffleBtn" class="action-btn action-btn--ghost">> RE-SHUFFLE</button>
+        </div>
+      </div>
+    </div>
+
     <div class="sys-nav bottom-nav">
-      <div class="gesture-key">
+      <button type="button" id="gestureToggleBtn" class="gesture-toggle-btn" aria-label="Toggle gestures legend">
+        KEY [±]
+      </button>
+      <div id="gestureKey" class="gesture-key">
         <div class="item"><span class="swatch pinch">[X]</span> DUAL_PINCH : LOCK TARGET</div>
-        <div class="item"><span class="swatch drag">[-]</span> SINGLE_PINCH : DRAG SECTOR</div>
-        <div class="item"><span class="swatch fist">[#]</span> HOLD_FIST : EXECUTE/PURGE</div>
+        <div class="item"><span class="swatch drag">[-]</span> SINGLE_PINCH / TOUCH : DRAG SECTOR</div>
+        <div class="item"><span class="swatch fist">[#]</span> HOLD_FIST / SAVE BTN : EXECUTE</div>
       </div>
     </div>
 
     <div id="loadingOverlay" class="sys-overlay">
       <div class="loader-text" id="loaderText">ESTABLISHING NEURAL LINK (LOADING MODEL)...</div>
-      <div class="loader-bar"></div>
+      <div class="loader-bar"><div class="loader-bar-fill" id="loaderBarFill"></div></div>
       <button type="button" id="loaderRetry" class="loader-retry hidden">> RETRY_CONNECTION</button>
     </div>
 
@@ -59,7 +88,7 @@
 
     <div id="galleryStrip" class="vault-strip">
       <div class="vault-empty" id="galleryEmpty">
-        > NO DATA EXTRACTED.<br>> AWAITING INPUT...
+        > NO DATA EXTRACTED.<br>> AWAITING OPTICAL INPUT...
       </div>
     </div>
 
